@@ -1,0 +1,35 @@
+# --- Environment ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+
+# --- Data (download instructions in README) ---
+data/raw/
+data/processed/
+*.zip
+
+# --- Model weights / checkpoints (too large for git; see README) ---
+models/*
+!models/.gitkeep
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+
+# --- Secrets ---
+.env
+kaggle.json
+
+# --- Course material (not ours to redistribute) ---
+*.pdf
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

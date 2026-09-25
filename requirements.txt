@@ -1,0 +1,48 @@
+# ITRI625 phishing classifier — Python 3.12
+# Install:  pip install -r requirements.txt
+#
+# PyTorch: PyPI only ships CPU builds for Windows, so we add the CUDA 13.0
+# wheel index. torch is pinned to an exact version because otherwise pip picks
+# the newest version from ANY index. When PyPI's CPU build is newer than the
+# CUDA index, you silently get no GPU. With the version pinned, pip prefers the
+# +cu130 build. The RTX 50-series (Blackwell) needs CUDA 12.8+ and an NVIDIA
+# driver >= 580. Without an NVIDIA GPU this still runs on CPU. For a smaller
+# CPU-only install, delete the --extra-index-url line.
+--extra-index-url https://download.pytorch.org/whl/cu130
+
+# --- Deep learning ---
+torch==2.14.0
+transformers
+tokenizers
+safetensors
+accelerate  # not used for training (custom loop); only speeds up model loading
+
+# --- Data + classical ML ---
+numpy
+pandas
+scikit-learn
+beautifulsoup4   # HTML -> text
+lxml             # fast parser backend for bs4
+kagglehub        # dataset download
+
+# --- Plots + notebook ---
+matplotlib
+jupyter
+ipykernel
+tqdm
+
+# --- XAI (bonus) ---
+captum
+
+# --- API ---
+fastapi
+uvicorn[standard]
+python-multipart  # needed for CSV upload on /predict_batch
+pydantic
+
+# --- Desktop app client ---
+requests
+
+# --- Tests ---
+pytest
+httpx             # FastAPI TestClient backend

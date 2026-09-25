@@ -21,6 +21,7 @@ accelerate  # not used for training (custom loop); only speeds up model loading
 numpy
 pandas
 scikit-learn
+pyarrow          # parquet files for the saved train/val/test splits
 beautifulsoup4   # HTML -> text
 lxml             # fast parser backend for bs4
 kagglehub        # dataset download

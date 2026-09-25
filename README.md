@@ -18,7 +18,9 @@ data/raw, data/processed           dataset + saved splits (gitignored, see "Data
 figures/                           every plot, saved as PNG
 results/                           training logs + metric tables (CSV)
 samples/                           demo emails (legitimate + phishing)
+docs/api_contract.md               API endpoints and JSON formats
 docs/handover/                     task briefs for teammates
+tests/                             pytest tests
 ```
 
 ## Setup
@@ -26,8 +28,8 @@ docs/handover/                     task briefs for teammates
 You need Python 3.12 and git. An NVIDIA GPU is optional; training falls back to the CPU.
 
 ```bash
-git clone <repo-url>
-cd MLPROJECT
+git clone https://github.com/Cavey03/ITRI625-Security-ML-Project.git
+cd ITRI625-Security-ML-Project
 py -3.12 -m venv .venv          # macOS/Linux: python3.12 -m venv .venv
 .venv\Scripts\activate          # macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
@@ -57,7 +59,24 @@ These are not committed to git. Instructions are added in Milestone 6.
 
 ## Running the API and desktop app
 
-Added in Milestones 8 and 9.
+The API's endpoints and JSON formats are defined in [docs/api_contract.md](docs/api_contract.md).
+Until the real model is served, a **mock API** returns fake, keyword-based scores in the
+same formats, so the desktop app can be built and tested:
+
+```bash
+uvicorn api.mock_app:app --port 8000
+```
+
+The real API and app instructions are added in Milestones 8 and 9.
+
+## Tests
+
+```bash
+pytest
+```
+
+The contract tests in `tests/test_contract.py` check that each API implementation
+follows `api/schemas.py`.
 
 ## Contributing
 

@@ -52,7 +52,26 @@ python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
 This project uses the **Phishing Email Dataset** by Naser Abdullah Alam (Kaggle), the dataset linked in the
 ITRI625 brief: <https://www.kaggle.com/datasets/naserabdullahalam/phishing-email-dataset>
 
-It is not committed to git. The download and cleaning steps are added in Milestone 4.
+The data is not committed to git. To recreate it:
+
+```bash
+python -m src.download_data     # downloads about 77 MB into data/raw/ (no Kaggle login needed for this public dataset)
+python -m src.data              # cleans, deduplicates and splits into data/processed/{train,val,test}.parquet
+```
+
+The pipeline is deterministic (seed 42). `results/data_report.json` holds a fingerprint of each
+split. If yours match, you have exactly the same data as the committed results.
+
+| step | rows |
+|---|---|
+| raw (six source corpora) | 82,486 |
+| after removing junk and 8,237 exact or near duplicates | 74,237 |
+| train / val / test (70/15/15, stratified on corpus × label) | 51,965 / 11,136 / 11,136 |
+
+Each split has columns `id, subject, body, text, label, source`. `text` is the model input
+(cleaned `subject + "\n\n" + body`), and `label` is 0 = legitimate, 1 = phishing/spam/fraud.
+`source` is for analysis only and is never a model input. Section 2 of the notebook explains
+every cleaning rule and the corpus-leakage checks.
 
 ## Model weights
 

@@ -19,6 +19,7 @@ figures/                           every plot, saved as PNG
 results/                           training logs + metric tables (CSV)
 samples/                           demo emails (legitimate + phishing)
 docs/api_contract.md               API endpoints and JSON formats
+docs/app_spec.md                   desktop app requirements
 docs/handover/                     task briefs for teammates
 tests/                             pytest tests
 ```

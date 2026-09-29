@@ -6,10 +6,13 @@ checklist that defines "done". Work on the named branch and merge through a pull
 
 | # | Brief | Branch | Can start |
 |---|---|---|---|
-| 1 | [Desktop app + demo samples](01_desktop_app.md) | `feat/desktop-app` | now (against the mock API) |
-| 2 | [EDA](02_eda.md) | `feat/eda` | now (raw data) |
-| 3 | [TF-IDF baseline](03_tfidf_baseline.md) | `feat/tfidf-baseline` | code now; run after Milestone 4 splits |
+| 1 | [EDA](01_eda.md) | `feat/eda` | now (raw data) |
+| 2 | [TF-IDF baseline](02_tfidf_baseline.md) | `feat/tfidf-baseline` | code now; run after Milestone 4 splits |
+| 3 | [Sample emails + user documentation](03_samples_and_docs.md) | `docs/samples`, `docs/user-guide` | samples now; guide once the desktop app exists |
 
-Shared references: [API contract](../api_contract.md) · label convention `0 = legitimate, 1 = phishing`.
+Shared references: [API contract](../api_contract.md) · [desktop app spec](../app_spec.md) ·
+label convention `0 = legitimate, 1 = phishing`.
 
-If something in a brief is unclear or seems wrong, ask before working around it.
+**No task here blocks Kyle's milestones.** Kyle's data pipeline does its own leakage
+checks, and the baseline predictions are only needed for the comparison plots in
+Milestone 7. If a brief is unclear or seems wrong, ask before working around it.

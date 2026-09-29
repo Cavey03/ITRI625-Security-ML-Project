@@ -1,7 +1,8 @@
-# Handover: Tkinter desktop app (+ demo sample emails)
+# Spec: Tkinter desktop app
 
-**Owner:** teammate · **Branch:** `feat/desktop-app` · **Marks:** part of "Desktop application" (15)
-**Depends on:** nothing. Build it against the mock API now, then swap to the real API in Milestone 9.
+**Owner:** Kyle · **Branch:** `feat/desktop-app` · **Marks:** part of "Desktop application" (15)
+**Depends on:** nothing. Built against the mock API (Milestone 4b), then pointed at the real API in Milestone 9.
+Demo sample emails and the user guide are the teammate's (see [handover brief 03](handover/03_samples_and_docs.md)).
 
 ## What to build
 
@@ -11,8 +12,7 @@ the model through the HTTP API; it never loads the model itself.
 
 ## Inputs and outputs
 
-- **Talks to:** the API described in [`docs/api_contract.md`](../api_contract.md). Read
-  it first. Use `requests`.
+- **Talks to:** the API described in [`docs/api_contract.md`](api_contract.md). Use `requests`.
 - **API URL:** default `http://127.0.0.1:8000`. Let the user override it with an
   environment variable `PHISH_API_URL` or a field in the app.
 - **Run the mock:** `uvicorn api.mock_app:app --port 8000`. Its scores are fake, but its
@@ -25,14 +25,11 @@ app/
   main.py         # entry point: python -m app.main
   api_client.py   # the ONLY file that uses requests; one function per endpoint
   eml_loader.py   # .txt / .eml -> (subject, body)
-samples/
-  legit/*.eml|.txt
-  phishing/*.eml|.txt
 tests/test_eml_loader.py
 ```
 
 Keep all HTTP calls inside `api_client.py`. That way the GUI code never deals with JSON or
-connection errors directly, and you can test the client without opening a window.
+connection errors directly, and the client can be tested without opening a window.
 
 ## Required features
 
@@ -75,20 +72,10 @@ connection errors directly, and you can test the client without opening a window
 **Optional (only if time allows):** a "Batch CSV" button that sends a file to `/predict_batch`
 and shows the results in a `ttk.Treeview`.
 
-## Sample demo emails (`samples/`)
-
-- At least **5 legitimate + 5 phishing**, a mix of `.eml` and `.txt`.
-- **Write them yourself.** Don't copy real emails from your inbox or from the dataset, since
-  real emails carry real people's data and could also be in our test set.
-- Use `example.com` / `example.org` domains and made-up names.
-- Include some **hard cases** for the demo: a legitimate password-reset email, a phishing
-  email with no link, a short email, and a long HTML email.
-- Add `samples/README.md` listing each file, its true label and what it's meant to show.
-
 ## Acceptance criteria
 
 - [ ] `python -m app.main` opens the window with the mock running.
-- [ ] Every sample in `samples/` loads correctly, both `.eml` and `.txt`.
+- [ ] `.eml` (plain, HTML-only, multipart) and `.txt` files load correctly. Later, every file in `samples/` too.
 - [ ] Moving the slider changes the verdict without sending a request (check the server log).
 - [ ] Words are highlighted in the right places, including after HTML is stripped.
       Test with an email containing `<b>verify</b>`.
@@ -97,10 +84,9 @@ and shows the results in a `ttk.Treeview`.
 - [ ] Empty subject and body shows the API's 422 `detail` or a local check, not a crash.
 - [ ] `pytest tests/test_eml_loader.py` passes.
 - [ ] Merged into `main` through a pull request. Put a screenshot in the pull request
-      description, which also helps with the write-up.
+      description (reusable in the write-up).
 
-## Out of scope for you
+## Contract changes
 
-The model, the real API and the explanation method all belong to Kyle. If the contract is
-missing something you need, raise it before changing `api/schemas.py`. Both of us have to
-agree to a contract change.
+If the app needs something the contract doesn't provide, change `api/schemas.py`,
+`docs/api_contract.md` and the contract tests together, in one pull request.

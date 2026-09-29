@@ -137,7 +137,7 @@ Every error returns JSON with a `detail` field.
 | 503 | Model not loaded yet (`/health` shows `status: "loading"`) |
 
 If the server isn't running at all, the app gets a connection error, not an HTTP
-status. The app has to handle that case too (see the app handover brief).
+status. The app has to handle that case too (see the [desktop app spec](app_spec.md)).
 
 ---
 

@@ -1,0 +1,7 @@
+source,legitimate,phishing,total,phishing_pct
+CEAS_08,17096,15641,32737,47.8
+Enron,14420,13893,28313,49.1
+Ling,2396,457,2853,16.0
+Nazario,0,1519,1519,100.0
+Nigerian_Fraud,0,3204,3204,100.0
+SpamAssasin,4072,1539,5611,27.4

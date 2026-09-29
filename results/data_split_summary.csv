@@ -1,0 +1,4 @@
+split,n,legitimate,phishing,phishing_pct
+train,51965,26588,25377,48.83
+val,11136,5698,5438,48.83
+test,11136,5698,5438,48.83

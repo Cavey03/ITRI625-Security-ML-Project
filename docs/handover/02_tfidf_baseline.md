@@ -91,4 +91,4 @@ header fragments, report it.
 - [ ] All five output files are created. Test metrics are computed once, with the C chosen on val.
 - [ ] `pytest tests/test_baseline.py` passes.
 - [ ] No test-set information is used in tuning (a reviewer should be able to see this in the code).
-- [ ] Merged into `main` through a pull request. Post the test metrics in the pull request description.
+- [ ] Merged into `main` (see CONTRIBUTING.md). Put the test metrics in the merge commit message.

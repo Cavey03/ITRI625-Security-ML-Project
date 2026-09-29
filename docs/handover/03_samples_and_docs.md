@@ -3,7 +3,7 @@
 **Owner:** teammate · **Branches:** `docs/samples`, then `docs/user-guide` · **Marks:** supports "Desktop application" (15) and the demo
 **Depends on:** part A needs nothing, so start now. Part B needs Kyle's desktop app (built against the mock API, so it exists before the real model).
 
-Do this as two separate pull requests. Part A can merge long before part B.
+Do this as two separate branches. Part A can merge long before part B.
 
 ---
 
@@ -66,7 +66,7 @@ so we can talk honestly about any it gets wrong.
 - [ ] Every file opens without errors using Python's email parser:
       `python -c "import email,email.policy,sys; email.message_from_binary_file(open(sys.argv[1],'rb'),policy=email.policy.default)" samples/phishing/x.eml`
 - [ ] No real company names, real people or real domains.
-- [ ] Merged into `main` through a pull request.
+- [ ] Merged into `main` (see CONTRIBUTING.md).
 
 ---
 
@@ -111,4 +111,4 @@ Troubleshooting should cover at least: "API unreachable", port 8000 already in u
 - [ ] Someone who has never seen the project can start the API and app, and check a
       sample email, using only the user guide.
 - [ ] Every screenshot is current (matches the latest app) and saved in `docs/img/`.
-- [ ] Merged into `main` through a pull request.
+- [ ] Merged into `main` (see CONTRIBUTING.md).

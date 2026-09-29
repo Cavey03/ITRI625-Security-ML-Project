@@ -14,8 +14,16 @@ Two contributors. The git history is marked, so keep it clean and readable.
   | `fix/`   | bug fixes                   | `fix/api-empty-body`       |
   | `docs/`  | README, handover briefs     | `docs/api-contract`        |
 
-- Merge into `main` only through a **pull request** that the other person has looked at.
-  Use a normal merge commit, not squash, so both authors stay visible in the history.
+- When the work is finished and tested, merge it into `main` with a merge commit, then push:
+  ```bash
+  git switch main
+  git pull
+  git merge --no-ff <branch>
+  git push
+  ```
+  `--no-ff` keeps a merge commit, so each piece of work stays visible as its own branch in
+  the history. Don't squash, so both authors stay visible. Pull requests are optional.
+  Open one if you want the other person to review first.
 - Delete the branch after it is merged.
 
 ## Commits

@@ -93,7 +93,7 @@ README.md              only the "Using the desktop app" and "Troubleshooting" se
 3. **What the threshold means**, in plain language. Lower = catches more phishing but
    flags more legitimate mail; higher = the opposite. Include one screenshot of the same
    email at two thresholds.
-4. **How to read the highlighting.** Red = pushes towards phishing, green = pushes towards
+4. **How to read the highlighting.** Red = pushes towards phishing, blue = pushes towards
    legitimate. It shows what the model reacted to, not proof the email is safe. Mention
    the "only the first part was analysed" note.
 5. What the app does when the API is down, with a screenshot of the error.

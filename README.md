@@ -87,7 +87,22 @@ same formats, so the desktop app can be built and tested:
 uvicorn api.mock_app:app --port 8000
 ```
 
-The real API and app instructions are added in Milestones 8 and 9.
+Then start the desktop app in a second terminal:
+
+```bash
+python -m app.main                       # or: python -m app.main --api-url http://host:port
+```
+
+The app has two tabs:
+- **Single email:** paste an email or load a `.txt`/`.eml` file, then press **Check** (Ctrl+Enter).
+  You get the verdict, the phishing probability, and the words that pushed the decision
+  (red = towards phishing, blue = towards legitimate). The **threshold slider** re-labels
+  the result instantly, without a new request.
+- **Batch CSV:** open a CSV with a `body` column (optional `subject`, `id`), get a sortable
+  table of results, and export it. Double-click a row to inspect it in the Single email tab.
+
+If the API isn't running, the status line turns red and the app shows the reason. The app
+never crashes because of it. The real API replaces the mock in Milestone 8.
 
 ## Tests
 

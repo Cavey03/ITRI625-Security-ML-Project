@@ -43,21 +43,23 @@ connection errors directly, and the client can be tested without opening a windo
      else is the body.
 3. **"Check" button** calls `POST /explain`. It returns both the prediction and the
    word scores, so you only need one request.
-4. **Verdict:** a large label showing `PHISHING` or `LEGITIMATE`, coloured red or green,
-   with the probability as a percentage and a progress bar.
+4. **Verdict:** a large label showing `PHISHING` or `LEGITIMATE`, coloured red or blue,
+   with the probability as a percentage and a bar coloured by verdict that marks the threshold.
+   (Not `ttk.Progressbar`: the Windows theme forces it green, which reads as "safe" at 99% phishing.)
 5. **Threshold slider** (`ttk.Scale`, 0.05–0.95, default 0.50). Moving it re-labels the
    last result **locally**, using `label = prob >= threshold`, with no new API call.
    Show the current value next to the slider.
 6. **Word highlighting:** a read-only `Text` widget showing the `subject` and `body`
    **from the API response**, not the user's input (see the contract for why). For each
    item in `words`, add a tag on `[start, end)`:
-   - `score > 0`: red background. `score < 0`: green background.
+   - `score > 0`: red background. `score < 0`: **blue** background. Red/blue rather than red/green,
+     because red/green is the pair colour-blind users most often can't tell apart.
    - Use 3 intensity buckets by `|score|`: 0.15–0.4 light, 0.4–0.7 medium, >0.7 strong.
      Skip words with `|score| < 0.15`, or everything ends up coloured.
    - Offsets are per field. Put the subject and body in the widget separately and convert
      each `start`/`end` to a Tk index with `"1.0 + {n} chars"`, adding the field's
      starting offset.
-   - Add a small legend: red = pushes towards phishing, green = pushes towards legitimate.
+   - Add a small legend: red = pushes towards phishing, blue = pushes towards legitimate.
    - If `truncated` is true, show "Only the first part of this email was analysed".
 7. **API down:**
    - At startup, call `GET /health` and show a status line (`● API connected` / `● API unreachable`).
@@ -69,7 +71,7 @@ connection errors directly, and the client can be tested without opening a windo
    result back with `root.after(...)`. Tkinter widgets can only be touched from the main
    thread. Disable the Check button while a request is running.
 
-**Optional (only if time allows):** a "Batch CSV" button that sends a file to `/predict_batch`
+**Batch CSV tab (included):** an "Open CSV…" button that sends a file to `/predict_batch`
 and shows the results in a `ttk.Treeview`.
 
 ## Acceptance criteria

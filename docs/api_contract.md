@@ -85,7 +85,7 @@ The response carries its own `subject` and `body`, and the app must use these, n
   exclusive. So `body[7:13] == "verify"`. The app shows the cleaned text in a read-only
   box and highlights `[start, end)`.
 - `score` is in [-1, 1]. **Positive = pushes towards phishing (red)**, negative = pushes
-  towards legitimate (green). The scores are scaled so the strongest word has |score| = 1.
+  towards legitimate (blue). The scores are scaled so the strongest word has |score| = 1.
   The number shows how strong a word is compared with the others in the same email; it is
   not a probability.
 - `truncated: true` means the email was longer than the model reads (256 tokens). Words

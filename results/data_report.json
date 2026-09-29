@@ -1,0 +1,24 @@
+{
+  "raw_rows": 82486,
+  "junk_removed": {
+    "too_short": 8,
+    "mailbox_system_msg": 2
+  },
+  "dedup": {
+    "before": 82476,
+    "exact_duplicates_removed": 3463,
+    "exact_label_conflicts_removed": 0,
+    "near_duplicates_removed": 4774,
+    "near_label_conflicts_removed": 2,
+    "after": 74237
+  },
+  "final_rows": 74237,
+  "source_only_accuracy": 0.5753,
+  "majority_class_accuracy": 0.5117,
+  "split_fingerprints": {
+    "train": "55e438239395",
+    "val": "0f8db86d23f5",
+    "test": "4db8fa45a019"
+  },
+  "seed": 42
+}

@@ -10,7 +10,10 @@ explain and often strong on email data. The comparison tells us, and the marker,
 the transformer is actually worth its cost. If the baseline gets 99% too, that's worth
 knowing. It may also mean the data is too easy or has shortcuts (see the EDA brief).
 
-## Inputs (produced by Kyle in Milestone 4)
+## Inputs (produced by Kyle in Milestone 4, now available)
+
+Recreate them with `python -m src.download_data` then `python -m src.data`. Check that the
+`split_fingerprints` in `results/data_report.json` match the committed file.
 
 ```
 data/processed/train.parquet   ~70%
@@ -21,6 +24,7 @@ data/processed/test.parquet    ~15%
 | column | type | meaning |
 |---|---|---|
 | `id` | str | stable email id, unique across all splits |
+| `subject`, `body` | str | cleaned subject and body (for inspection) |
 | `text` | str | **model input**: cleaned `subject + "\n\n" + body` |
 | `label` | int | 0 = legitimate, 1 = phishing |
 | `source` | str | which original collection the email came from (for analysis only; **never a feature**) |

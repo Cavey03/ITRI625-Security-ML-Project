@@ -1,7 +1,7 @@
 # Handover briefs
 
 Each brief is a self-contained task: what to build, its inputs and outputs, and a
-checklist that defines "done". Work on the named branch and merge through a pull request
+checklist that defines "done". Work on the named branch and merge it into `main` when done
 (see [CONTRIBUTING.md](../../CONTRIBUTING.md)).
 
 | # | Brief | Branch | Can start |

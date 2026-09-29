@@ -86,4 +86,4 @@ cleaning**, listing what you think should be removed or checked.
 - [ ] Items 1–9 above are all covered.
 - [ ] `docs/eda_findings.md` exists and has the recommendations section.
 - [ ] No data files committed (`git status` shows nothing under `data/`).
-- [ ] Merged into `main` through a pull request.
+- [ ] Merged into `main` (see CONTRIBUTING.md).

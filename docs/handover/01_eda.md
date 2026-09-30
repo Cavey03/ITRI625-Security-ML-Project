@@ -37,23 +37,22 @@ Kyle copies the functions from `src/eda.py` into the main notebook. Keeping the 
 ## What to analyse
 
 **Already done by Kyle in the main notebook, section 2. Don't redo these; just cite the
-numbers in your findings:** the file inventory, the fact that `phishing_email.csv` is the
+numbers in your findings:** the file inventory, class balance, the fact that `phishing_email.csv` is the
 six files stacked, the label mix per source (Nazario and Nigerian_Fraud are 100% label 1)
 and the duplicate counts. Read section 2 first. It explains the cleaning and what was removed.
 
 Your analyses, on `train.parquet`:
 
-1. **Class balance**, overall and per source, as a bar chart with counts and percentages.
-2. **Length:** characters and words per email, split by class. Use histograms or
+1. **URLs:** count of URLs per email by class, the share of emails with at least one URL,
+   and the top 20 URL domains by class.
+2. **Common words by class:** top 25 words after removing stop words (use
+   `sklearn.feature_extraction.text.ENGLISH_STOP_WORDS`), one horizontal bar chart per
+   class.
+3. **Length:** characters and words per email, split by class. Use histograms or
    boxplots with a **log x-axis**, because email lengths are very skewed. Report the
    median and 95th percentile per class. The notebook's section 3.3 already covers token
    counts. Yours is characters and words, and **per source**.
-3. **URLs:** count of URLs per email by class, the share of emails with at least one URL,
-   and the top 20 URL domains by class.
-4. **Common words by class:** top 25 words after removing stop words (use
-   `sklearn.feature_extraction.text.ENGLISH_STOP_WORDS`), one horizontal bar chart per
-   class.
-5. **Shortcut hunt on the *cleaned* text:** look for tokens that are nearly perfect predictors but aren't about
+4. **Label shortcut hunt on the *cleaned* text:** look for tokens that are nearly perfect predictors but aren't about
    phishing, such as leftover header lines (`Message-ID`, `X-Mailer`), mailing-list
    footers, collection-specific boilerplate or date formats. One quick method is to rank
    tokens by how much more often they appear in one class, keeping only tokens that
@@ -72,7 +71,7 @@ cleaning**, listing what you think should be removed or checked.
       are saved in the committed file**.
 - [ ] Every figure has a title, axis labels and a legend where needed, and is saved to
       `figures/eda_*.png`.
-- [ ] Items 1–5 above are all covered.
+- [ ] Analyses 1–4 above are all covered.
 - [ ] `docs/eda_findings.md` exists and has the recommendations section.
 - [ ] No data files committed (`git status` shows nothing under `data/`).
 - [ ] Merged into `main` (see CONTRIBUTING.md).

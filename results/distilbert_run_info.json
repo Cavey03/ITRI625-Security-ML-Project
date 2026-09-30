@@ -1,0 +1,25 @@
+{
+  "stopped_early": true,
+  "last_step": 1800,
+  "best_step": 1200,
+  "best_val_loss": 0.03866764756947242,
+  "total_steps_planned": 4872,
+  "train_minutes": 3.5,
+  "evaluations": 9,
+  "device": "NVIDIA GeForce RTX 5070",
+  "config": {
+    "model_name": "distilbert-base-uncased",
+    "max_len": 256,
+    "batch_size": 32,
+    "eval_batch_size": 128,
+    "lr": 2e-05,
+    "weight_decay": 0.01,
+    "warmup_frac": 0.06,
+    "max_epochs": 3,
+    "eval_every": 200,
+    "patience": 3,
+    "min_delta": 0.001,
+    "grad_clip": 1.0,
+    "seed": 42
+  }
+}

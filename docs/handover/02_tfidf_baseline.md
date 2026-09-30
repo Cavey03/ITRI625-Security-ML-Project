@@ -1,7 +1,7 @@
 # Handover: TF-IDF + Logistic Regression baseline
 
 **Owner:** teammate · **Branch:** `feat/tfidf-baseline` · **Marks:** part of "Model development" (20)
-**Depends on:** Milestone 4 (Kyle's saved splits). You can write and test the code on a small fake DataFrame before then.
+**Depends on:** nothing. The splits are available now (see `START_HERE.md`). **This is the top-priority task:** the notebook's model comparison (section 4.7) is waiting for it.
 
 ## Why a baseline
 

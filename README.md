@@ -128,4 +128,4 @@ follows `api/schemas.py`.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch, pull request and commit rules.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch and commit rules. New team member? Start with [docs/handover/START_HERE.md](docs/handover/START_HERE.md).

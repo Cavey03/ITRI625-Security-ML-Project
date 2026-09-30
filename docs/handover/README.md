@@ -4,11 +4,13 @@ Each brief is a self-contained task: what to build, its inputs and outputs, and 
 checklist that defines "done". Work on the named branch and merge it into `main` when done
 (see [CONTRIBUTING.md](../../CONTRIBUTING.md)).
 
-| # | Brief | Branch | Can start |
+| Priority | Brief | Branch | Status |
 |---|---|---|---|
-| 1 | [EDA](01_eda.md) | `feat/eda` | now (raw data) |
-| 2 | [TF-IDF baseline](02_tfidf_baseline.md) | `feat/tfidf-baseline` | code now; run after Milestone 4 splits |
-| 3 | [Sample emails + user documentation](03_samples_and_docs.md) | `docs/samples`, `docs/user-guide` | samples now; guide once the desktop app exists |
+| **1** | [TF-IDF baseline](02_tfidf_baseline.md) | `feat/tfidf-baseline` | ready: the notebook's comparison section is waiting for it |
+| 2 | [EDA](01_eda.md) | `feat/eda` | ready |
+| 3 | [Sample emails + user documentation](03_samples_and_docs.md) | `docs/samples`, `docs/user-guide` | ready |
+
+**New here? Read [START_HERE.md](START_HERE.md) first.** It covers setup, data, the git workflow and the order of work.
 
 Shared references: [API contract](../api_contract.md) · [desktop app spec](../app_spec.md) ·
 label convention `0 = legitimate, 1 = phishing`.

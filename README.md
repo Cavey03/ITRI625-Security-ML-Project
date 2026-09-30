@@ -75,7 +75,20 @@ every cleaning rule and the corpus-leakage checks.
 
 ## Model weights
 
-These are not committed to git. Instructions are added in Milestone 6.
+The weights are not committed to git: the checkpoint is about 255 MB. Section 3 of the notebook
+produces them:
+
+```
+models/distilbert_best/      model.safetensors, config.json, tokenizer files, train_config.json
+results/distilbert_train_log.csv    one row per validation check (losses + metrics)
+results/distilbert_run_info.json    best step, early-stopping outcome, training time, config
+```
+
+To recreate them, run the notebook with `RETRAIN = True`. On an RTX 5070 training takes about
+4 minutes, because early stopping ends it after about 1.1 epochs. The full 3-epoch maximum
+would take about 12 minutes. Set `SMALL_RUN = True` for a quick CPU check on a 2,000-email subset. With
+`RETRAIN = False`, the notebook reuses an existing checkpoint and training log instead of
+training again.
 
 ## Running the API and desktop app
 

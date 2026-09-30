@@ -1,7 +1,7 @@
 # Handover: Exploratory Data Analysis (EDA)
 
 **Owner:** teammate · **Branch:** `feat/eda` · **Marks:** supports "Dataset preparation" and the theory write-up
-**Depends on:** being able to download the dataset. You don't need to wait for the cleaned splits.
+**Depends on:** nothing. The data and cleaned splits are available now.
 
 ## Why this matters
 
@@ -12,21 +12,14 @@ email. Your findings feed directly into how Kyle cleans the data in Milestone 4.
 
 ## Getting the data
 
-Dataset: <https://www.kaggle.com/datasets/naserabdullahalam/phishing-email-dataset>
+Follow `START_HERE.md` steps 2–3. You'll then have:
 
-```python
-import kagglehub
-path = kagglehub.dataset_download("naserabdullahalam/phishing-email-dataset")
-```
+* `data/raw/*.csv`: the six source corpora plus the pre-merged file, exactly as downloaded
+* `data/processed/{train,val,test}.parquet`: cleaned and deduplicated emails with columns
+  `id, subject, body, text, label, source` (label 0 = legitimate, 1 = phishing/spam/fraud)
 
-If this asks for credentials, create a Kaggle API token and put it in
-`~/.kaggle/kaggle.json`. **Never commit that file.** Copy the CSVs into `data/raw/`,
-which git ignores.
-
-The dataset is built from several older email collections. We expect files roughly like
-`CEAS_08.csv`, `Enron.csv`, `Ling.csv`, `Nazario.csv`, `Nigerian_Fraud.csv`,
-`SpamAssasin.csv`, plus a combined `phishing_email.csv`. **Check this; don't assume it.**
-Recording what each file actually contains is your first deliverable.
+**Use `data/processed/train.parquet` for the analysis**, since that's what the models learn
+from. Don't look at the test split: it's reserved for the final evaluation.
 
 ## Files
 
@@ -43,33 +36,29 @@ Kyle copies the functions from `src/eda.py` into the main notebook. Keeping the 
 
 ## What to analyse
 
-1. **File inventory table.** For each CSV: number of rows, column names, label values,
-   phishing-to-legitimate count, and number of empty or missing bodies.
-2. **Is the combined file just the others stacked together?** Check whether
-   `phishing_email.csv` is a concatenation of the individual files. Hash the text and
-   count the overlap. This tells Kyle which file(s) to build from.
-3. **Label by source (most important).** Make a crosstab of source file against label
-   and draw a stacked bar chart. If a source is almost 100% one class (for example if
-   Enron is all legitimate), the model can learn "looks like Enron = legitimate", which
-   is **corpus leakage**. Write down every source where one class makes up more than 95%.
-4. **Class balance** overall, as a bar chart with counts and percentages.
-5. **Length:** characters and words per email, split by class. Use histograms or
+**Already done by Kyle in the main notebook, section 2. Don't redo these; just cite the
+numbers in your findings:** the file inventory, the fact that `phishing_email.csv` is the
+six files stacked, the label mix per source (Nazario and Nigerian_Fraud are 100% label 1)
+and the duplicate counts. Read section 2 first. It explains the cleaning and what was removed.
+
+Your analyses, on `train.parquet`:
+
+1. **Class balance**, overall and per source, as a bar chart with counts and percentages.
+2. **Length:** characters and words per email, split by class. Use histograms or
    boxplots with a **log x-axis**, because email lengths are very skewed. Report the
-   median and 95th percentile. Also estimate the share of emails longer than about 256
-   DistilBERT tokens, using words × 1.3 as a rough estimate. That share is how much text
-   our model will cut off.
-6. **URLs:** count of URLs per email by class, the share of emails with at least one URL,
+   median and 95th percentile per class. The notebook's section 3.3 already covers token
+   counts. Yours is characters and words, and **per source**.
+3. **URLs:** count of URLs per email by class, the share of emails with at least one URL,
    and the top 20 URL domains by class.
-7. **Common words by class:** top 25 words after removing stop words (use
+4. **Common words by class:** top 25 words after removing stop words (use
    `sklearn.feature_extraction.text.ENGLISH_STOP_WORDS`), one horizontal bar chart per
    class.
-8. **Shortcut hunt:** look for tokens that are nearly perfect predictors but aren't about
+5. **Shortcut hunt on the *cleaned* text:** look for tokens that are nearly perfect predictors but aren't about
    phishing, such as leftover header lines (`Message-ID`, `X-Mailer`), mailing-list
    footers, collection-specific boilerplate or date formats. One quick method is to rank
    tokens by how much more often they appear in one class, keeping only tokens that
-   occur at least 50 times. List anything suspicious.
-9. **Duplicates:** count exact duplicate texts, both overall and duplicates that appear
-   under **both** labels. Report the numbers only; Kyle removes them in Milestone 4.
+   occur at least 50 times. List anything suspicious. This checks whether the cleaning
+   missed anything, which is useful whatever you find.
 
 ## `docs/eda_findings.md` (about 1 page)
 
@@ -83,7 +72,7 @@ cleaning**, listing what you think should be removed or checked.
       are saved in the committed file**.
 - [ ] Every figure has a title, axis labels and a legend where needed, and is saved to
       `figures/eda_*.png`.
-- [ ] Items 1–9 above are all covered.
+- [ ] Items 1–5 above are all covered.
 - [ ] `docs/eda_findings.md` exists and has the recommendations section.
 - [ ] No data files committed (`git status` shows nothing under `data/`).
 - [ ] Merged into `main` (see CONTRIBUTING.md).

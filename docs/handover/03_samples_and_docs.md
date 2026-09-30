@@ -1,7 +1,7 @@
 # Handover: demo sample emails + user documentation
 
 **Owner:** teammate · **Branches:** `docs/samples`, then `docs/user-guide` · **Marks:** supports "Desktop application" (15) and the demo
-**Depends on:** part A needs nothing, so start now. Part B needs Kyle's desktop app (built against the mock API, so it exists before the real model).
+**Depends on:** nothing. Both parts can start now: the desktop app exists and runs against the mock API.
 
 Do this as two separate branches. Part A can merge long before part B.
 
@@ -72,7 +72,7 @@ so we can talk honestly about any it gets wrong.
 
 ## Part B: user guide + README usage sections
 
-Start this once Kyle's desktop app is merged. Run it against the mock
+The desktop app is ready. Run it against the mock
 (`uvicorn api.mock_app:app --port 8000`) and later the real API.
 
 **Files**

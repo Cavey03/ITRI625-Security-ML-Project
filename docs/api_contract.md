@@ -141,14 +141,15 @@ status. The app has to handle that case too (see the [desktop app spec](app_spec
 
 ---
 
-## Mock server
+## Implementations
 
-[`api/mock_app.py`](../api/mock_app.py) follows this contract, but its scores are **fake**.
-They come from a keyword list, not a model. Use it to build the app now:
+| | run | scores |
+|---|---|---|
+| real | `uvicorn api.main:app --port 8000` | fine-tuned DistilBERT. `/explain` uses Integrated Gradients |
+| mock | `uvicorn api.mock_app:app --port 8000` | **fake**, from a keyword list. For working without trained weights |
 
-```bash
-uvicorn api.mock_app:app --port 8000
-```
+Both pass the same contract tests and share their CSV handling (`api/common.py`), so the
+desktop app works with either one unchanged.
 
-When the real API is ready, run `uvicorn api.main:app --port 8000` instead. The app
-shouldn't need any code changes.
+**Batch rows over the length limit:** a subject or body longer than 100,000 characters is
+reported as a row `error` (like an empty row) instead of failing the whole upload.

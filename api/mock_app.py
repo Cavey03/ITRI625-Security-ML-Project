@@ -8,17 +8,13 @@ Docs: http://127.0.0.1:8000/docs
 """
 from __future__ import annotations
 
-import csv
-import io
 import math
 import re
 
-from fastapi import FastAPI, File, HTTPException, Query, UploadFile
+from fastapi import FastAPI, File, Query, UploadFile
 
-from api.schemas import (
-    MAX_BATCH_BYTES, MAX_BATCH_ROWS, BatchOut, BatchRow, EmailIn, ExplainIn,
-    ExplainOut, HealthOut, Prediction, WordScore,
-)
+from api.common import prediction, read_batch_csv, row_problem
+from api.schemas import BatchOut, BatchRow, EmailIn, ExplainIn, ExplainOut, HealthOut, Prediction, WordScore
 
 MODEL_VERSION = "mock-0"
 
@@ -59,10 +55,7 @@ def _score(subject: str, body: str) -> tuple[str, str, list[tuple[str, int, int,
 
 
 def _prediction(prob: float, threshold: float) -> dict:
-    label_id = int(prob >= threshold)
-    return {"label": ("legitimate", "phishing")[label_id], "label_id": label_id,
-            "probability_phishing": round(prob, 6), "threshold": threshold,
-            "model_version": MODEL_VERSION}
+    return prediction(prob, threshold, MODEL_VERSION)
 
 
 @app.get("/health", response_model=HealthOut)
@@ -91,24 +84,14 @@ def explain(req: ExplainIn) -> ExplainOut:
 @app.post("/predict_batch", response_model=BatchOut)
 async def predict_batch(file: UploadFile = File(...),
                         threshold: float = Query(0.5, ge=0.0, le=1.0)) -> BatchOut:
-    raw = await file.read(MAX_BATCH_BYTES + 1)
-    if len(raw) > MAX_BATCH_BYTES:
-        raise HTTPException(413, f"file larger than {MAX_BATCH_BYTES} bytes")
-    try:
-        rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8-sig"))))
-    except (UnicodeDecodeError, csv.Error) as exc:
-        raise HTTPException(400, f"could not parse CSV: {exc}") from exc
-    if rows and "body" not in rows[0]:
-        raise HTTPException(400, "CSV must have a 'body' column (and optionally 'subject', 'id')")
-    if len(rows) > MAX_BATCH_ROWS:
-        raise HTTPException(413, f"more than {MAX_BATCH_ROWS} rows")
+    rows = await read_batch_csv(file)
 
     results = []
     for i, r in enumerate(rows):
         subject, body = r.get("subject") or "", r.get("body") or ""
-        if not (subject.strip() or body.strip()):
+        if problem := row_problem(subject, body):
             results.append(BatchRow(row=i, id=r.get("id"), label=None, label_id=None,
-                                    probability_phishing=None, error="empty subject and body"))
+                                    probability_phishing=None, error=problem))
             continue
         *_, prob = _score(subject, body)
         p = _prediction(prob, threshold)

@@ -11,6 +11,14 @@ from api.schemas import BatchOut, ExplainOut, HealthOut, Prediction
 
 APPS = {"mock": mock_app}
 
+# The real API joins the same tests whenever a trained checkpoint is present
+# (models/ is not in git, so a fresh clone without weights just runs the mock).
+from api.main import MODEL_DIR, app as real_app  # noqa: E402
+from pathlib import Path  # noqa: E402
+
+if (Path(MODEL_DIR) / "config.json").exists():
+    APPS["real"] = real_app
+
 PHISH = {"subject": "URGENT: account suspended",
          "body": "Verify your password immediately at http://secure-bank.example.com"}
 LEGIT = {"subject": "Project meeting", "body": "Thanks, the schedule is attached. Regards, Sam"}
@@ -75,6 +83,15 @@ def test_predict_batch(client):
     assert (b.n_rows, b.n_scored) == (3, 2)
     assert [x.id for x in b.results] == ["a", "b", "c"]
     assert b.results[1].error and b.results[1].probability_phishing is None
+
+
+def test_predict_batch_long_email_is_a_row_error_not_a_failed_upload(client):
+    long_body = "x" * 150_000       # longer than both csv's default field limit and MAX_CHARS
+    csv_bytes = f'id,subject,body\na,Hi,"{long_body}"\nb,Hello,"see you at lunch"\n'.encode()
+    r = client.post("/predict_batch", files={"file": ("e.csv", csv_bytes, "text/csv")})
+    assert r.status_code == 200
+    b = BatchOut.model_validate(r.json())
+    assert b.n_scored == 1 and "longer than" in b.results[0].error
 
 
 def test_predict_batch_requires_body_column(client):

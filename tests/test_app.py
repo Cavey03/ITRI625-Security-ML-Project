@@ -159,6 +159,11 @@ def gui(live_url):
     from app.main import App
     app = App(root, ApiClient(live_url))
     yield app
+    # Free Tk variables here, on the main thread; otherwise they are garbage-collected later
+    # from a server thread and Tk complains ("main thread is not in main loop").
+    import gc
+    del app
+    gc.collect()
     root.destroy()
 
 

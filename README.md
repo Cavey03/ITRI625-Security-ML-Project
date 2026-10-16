@@ -127,6 +127,17 @@ The app has two tabs:
 If the API isn't running, the status line turns red and the app shows the reason. The app
 never crashes because of it.
 
+![Single email tab: verdict, probability bar with threshold marker, highlighted explanation](docs/img/app_phishing.png)
+
+![Batch CSV tab: one row per email, bad rows reported instead of failing the file](docs/img/app_batch.png)
+
+To check the app and the real API together end to end (17 checks, including the API going
+down and coming back):
+
+```bash
+python scripts/check_app_e2e.py
+```
+
 ## Tests
 
 ```bash

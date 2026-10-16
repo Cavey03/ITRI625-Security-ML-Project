@@ -92,12 +92,23 @@ training again.
 ## Running the API and desktop app
 
 The API's endpoints and JSON formats are defined in [docs/api_contract.md](docs/api_contract.md).
-Until the real model is served, a **mock API** returns fake, keyword-based scores in the
-same formats, so the desktop app can be built and tested:
+Start the **real API**, which serves the trained DistilBERT model (needs `models/distilbert_best/`,
+see "Model weights"):
 
 ```bash
-uvicorn api.mock_app:app --port 8000
+uvicorn api.main:app --port 8000
 ```
+
+The model is loaded once at startup (under a second on GPU). Typical times per request:
+
+| | GPU (RTX 5070) | CPU |
+|---|---|---|
+| `/predict` | ~10 ms | ~30 ms |
+| `/explain` (Integrated Gradients, 50 steps) | ~50 ms | 2–6 s, depending on email length |
+
+Set `PHISH_DEVICE=cpu` to force the CPU, and `PHISH_MODEL_DIR` to use another checkpoint.
+Interactive API docs: <http://127.0.0.1:8000/docs>. Without trained weights, use the **mock API**
+instead (same formats, fake keyword-based scores): `uvicorn api.mock_app:app --port 8000`.
 
 Then start the desktop app in a second terminal:
 
@@ -114,7 +125,7 @@ The app has two tabs:
   table of results, and export it. Double-click a row to inspect it in the Single email tab.
 
 If the API isn't running, the status line turns red and the app shows the reason. The app
-never crashes because of it. The real API replaces the mock in Milestone 8.
+never crashes because of it.
 
 ## Tests
 
@@ -122,8 +133,10 @@ never crashes because of it. The real API replaces the mock in Milestone 8.
 pytest
 ```
 
-The contract tests in `tests/test_contract.py` check that each API implementation
-follows `api/schemas.py`.
+The contract tests in `tests/test_contract.py` run against **both** the mock and the real API
+(the real one only when trained weights are present). `tests/test_api.py` also checks
+**training/serving parity**: the API's probabilities for test emails must match the notebook's
+saved predictions (on 1,000 test emails: max difference 0.013, labels agree 100%).
 
 ## Contributing
 

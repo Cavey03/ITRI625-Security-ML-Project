@@ -49,7 +49,7 @@ class ApiClient:
         except requests.ConnectionError:
             raise ApiError(f"Cannot reach the API at {self.base_url}.\n"
                            "Is the server running? Start it with:\n"
-                           "uvicorn api.mock_app:app --port 8000") from None
+                           "uvicorn api.main:app --port 8000") from None
         except requests.Timeout:
             raise ApiError(f"The API did not answer within {timeout} s.") from None
         except requests.RequestException as exc:

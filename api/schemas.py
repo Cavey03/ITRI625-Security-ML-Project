@@ -2,7 +2,7 @@
 
 This file IS the contract. docs/api_contract.md describes it in prose; if the two
 ever disagree, this file wins. Changing a field here is a breaking change for the
-desktop app, so do it in a PR that both team members review.
+desktop app, so update docs/api_contract.md and the contract tests in the same change.
 
 Label convention everywhere in the project: 0 = legitimate, 1 = phishing.
 """

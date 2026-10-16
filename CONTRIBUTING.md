@@ -12,7 +12,7 @@ Two contributors. The git history is marked, so keep it clean and readable.
   | `feat/`  | new functionality           | `feat/distilbert-training` |
   | `data/`  | data pipeline / splits      | `data/dedup-and-splits`    |
   | `fix/`   | bug fixes                   | `fix/api-empty-body`       |
-  | `docs/`  | README, handover briefs     | `docs/api-contract`        |
+  | `docs/`  | README, documentation       | `docs/api-contract`        |
 
 - When the work is finished and tested, merge it into `main` with a merge commit, then push:
   ```bash
@@ -35,11 +35,10 @@ Two contributors. The git history is marked, so keep it clean and readable.
 
 ## The notebook (avoiding merge conflicts)
 
-`notebooks/itri625_phishing.ipynb` is owned by Kyle. `.ipynb` files are JSON and
-merge badly, so:
+`.ipynb` files are JSON and merge badly, so:
 
-- Teammate code (EDA, TF-IDF baseline) goes in `src/` modules or a separate
-  notebook (`notebooks/eda.ipynb`). Kyle imports or pulls it into the main notebook.
+- Only one person edits `notebooks/itri625_phishing.ipynb` at a time. Supporting code goes
+  in `src/` modules or a separate notebook and is imported into the main notebook.
 - **Commit the notebook with its outputs.** Figures and metrics must be visible in the
   committed file (-10 marks otherwise). Do not use `nbstripout` or clear outputs.
 

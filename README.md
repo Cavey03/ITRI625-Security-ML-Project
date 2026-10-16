@@ -20,7 +20,6 @@ results/                           training logs + metric tables (CSV)
 samples/                           demo emails (legitimate + phishing)
 docs/api_contract.md               API endpoints and JSON formats
 docs/app_spec.md                   desktop app requirements
-docs/handover/                     task briefs for teammates
 tests/                             pytest tests
 ```
 
@@ -128,4 +127,4 @@ follows `api/schemas.py`.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch and commit rules. New team member? Start with [docs/handover/START_HERE.md](docs/handover/START_HERE.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch and commit rules.

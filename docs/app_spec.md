@@ -1,8 +1,7 @@
 # Spec: Tkinter desktop app
 
-**Owner:** Kyle · **Branch:** `feat/desktop-app` · **Marks:** part of "Desktop application" (15)
+**Branch:** `feat/desktop-app` · **Marks:** part of "Desktop application" (15)
 **Depends on:** nothing. Built against the mock API (Milestone 4b), then pointed at the real API in Milestone 9.
-Demo sample emails and the user guide are the teammate's (see [handover brief 03](handover/03_samples_and_docs.md)).
 
 ## What to build
 

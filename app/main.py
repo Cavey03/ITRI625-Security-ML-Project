@@ -1,7 +1,7 @@
 """Phishing Email Checker: Tkinter desktop client for the phishing API.
 
-Run the API first (mock for now):   uvicorn api.mock_app:app --port 8000
-Then:                               python -m app.main [--api-url http://127.0.0.1:8000]
+Run the API first:   uvicorn api.main:app --port 8000      (or api.mock_app without trained weights)
+Then:                python -m app.main [--api-url http://127.0.0.1:8000]
 
 Threading: every API call runs in a worker thread. Tk widgets may only be touched
 from the main thread, so workers put (callback, result) on a queue and the main

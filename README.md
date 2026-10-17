@@ -138,6 +138,20 @@ down and coming back):
 python scripts/check_app_e2e.py
 ```
 
+## Running the API in Docker
+
+The `Dockerfile` packages the API with **CPU-only** PyTorch (no GPU needed). The trained weights
+aren't in git, so they're mounted into the container instead of copied into the image:
+
+```bash
+docker build -t phishing-api .
+docker run --rm -p 8000:8000 -v "$(pwd)/models/distilbert_best:/models/distilbert_best:ro" phishing-api
+```
+
+On Windows PowerShell, use `-v "${PWD}/models/distilbert_best:/models/distilbert_best:ro"`. Then point
+the desktop app at it as usual (`python -m app.main`, default URL `http://127.0.0.1:8000`). The
+container runs as a non-root user and has a health check that calls `/health`.
+
 ## Tests
 
 ```bash

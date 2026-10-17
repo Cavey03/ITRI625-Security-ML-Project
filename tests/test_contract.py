@@ -1,7 +1,7 @@
 """Contract tests. Any app that claims to implement api/schemas.py must pass these.
 
-Milestone 8 adds the real API to APPS, so the mock and the real service are held
-to exactly the same contract.
+Both the mock and the real API (when trained weights are present) are in APPS, so they
+are held to exactly the same contract.
 """
 import pytest
 from fastapi.testclient import TestClient

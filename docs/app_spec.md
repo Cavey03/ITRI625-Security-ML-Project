@@ -1,7 +1,7 @@
 # Spec: Tkinter desktop app
 
 **Branch:** `feat/desktop-app` · **Marks:** part of "Desktop application" (15)
-**Depends on:** nothing. Built against the mock API (Milestone 4b), then pointed at the real API in Milestone 9.
+**Depends on:** nothing. Built against the mock API first, then pointed at the real API (`api/main.py`).
 
 ## What to build
 

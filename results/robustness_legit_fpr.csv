@@ -1,0 +1,19 @@
+perturbation,rate,DistilBERT FPR,TF-IDF + LR FPR
+typos,0.0,0.009,0.015
+typos,0.1,0.015,0.017
+typos,0.2,0.03,0.018
+typos,0.3,0.072,0.017
+typos,0.5,0.21,0.03
+typos,0.8,0.524,0.071
+homoglyphs,0.0,0.009,0.015
+homoglyphs,0.1,0.044,0.012
+homoglyphs,0.2,0.111,0.017
+homoglyphs,0.3,0.194,0.014
+homoglyphs,0.5,0.408,0.017
+homoglyphs,0.8,0.642,0.02
+synonyms,0.0,0.009,0.015
+synonyms,0.1,0.009,0.014
+synonyms,0.2,0.009,0.015
+synonyms,0.3,0.009,0.014
+synonyms,0.5,0.009,0.013
+synonyms,0.8,0.009,0.013

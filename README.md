@@ -14,7 +14,7 @@ Test set: 11,136 emails, never used for any decision before the final evaluation
 | DistilBERT (fine-tuned) | 0.9892 | 0.9915 | 0.9864 | 0.9889 | 0.9994 | 120 | **46** | 74 |
 | TF-IDF + Logistic Regression | **0.9913** | 0.9890 | **0.9932** | **0.9911** | **0.9997** | **97** | 60 | **37** |
 
-Key findings (details in the notebook):
+Key findings (details in the notebook; a write-up guide with all numbers is in [docs/theory_notes.md](docs/theory_notes.md)):
 * **Data:** the dataset merges six older corpora, and its "phishing" label also covers generic
   spam and advance-fee fraud. 8,237 duplicates were removed **before** splitting. Leakage
   fingerprints (years, email addresses, header lines, a mailbox owner's name) were removed, and
@@ -40,7 +40,7 @@ scripts/check_app_e2e.py           end-to-end check: desktop app + real API (17 
 tests/                             pytest: API contract, training/serving parity, app, cleaning
 figures/                           every plot, saved as PNG
 results/                           training log, metric tables, predictions, robustness results (CSV/JSON)
-docs/                              API contract, desktop app spec, screenshots
+docs/                              API contract, desktop app spec, theory notes, screenshots
 Dockerfile, requirements-api.txt   containerised API (CPU)
 models/                            trained weights (not in git, see "Model weights")
 data/raw, data/processed           dataset + saved splits (not in git, see "Data")

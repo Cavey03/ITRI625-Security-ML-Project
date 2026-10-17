@@ -1,0 +1,15 @@
+# Keep the build context small: only api/, src/ and requirements-api.txt are needed
+.venv/
+.git/
+data/
+models/
+notebooks/
+figures/
+results/
+samples/
+docs/
+tests/
+scripts/
+app/
+**/__pycache__/
+*.pdf

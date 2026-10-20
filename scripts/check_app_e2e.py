@@ -52,7 +52,14 @@ def explain_calls():
     return (SP / "api_log.txt").read_text(errors="ignore").count('"POST /explain')
 
 (SP / "api_log.txt").write_text("")
+try:
+    requests.get(URL + "/health", timeout=1)
+    sys.exit(f"Port {PORT} is already in use (a leftover API from an earlier run?). Stop it and retry.")
+except requests.RequestException:
+    pass
 api = start_api()
+import atexit
+atexit.register(lambda: api.poll() is None and api.terminate())   # never leave a server running
 
 root = tk.Tk(); root.geometry("1180x720+40+40"); root.attributes("-topmost", True)
 if sys.platform == "win32":

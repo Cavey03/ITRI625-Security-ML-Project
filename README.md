@@ -62,6 +62,34 @@ metric is saved in the committed file, so you can read it on GitHub without runn
 Flags in the config cell: `RETRAIN` (train again, or reuse the saved checkpoint and replay its training
 log; the committed run reuses it) and `SMALL_RUN` (a quick CPU check on a 2,000-email subset).
 
+## Quick start: run the app on another computer
+
+To run the desktop app with the real model you need the code (from GitHub) **and** the trained
+weights (`models/distilbert_best/`, 268 MB, not in git). Tested on a fresh clone, CPU only:
+
+1. **Clone into a short path.** Windows can't load some library files if the path is longer
+   than 260 characters, so avoid deep folders:
+   ```bash
+   git clone https://github.com/Cavey03/ITRI625-Security-ML-Project.git C:\ITRI625
+   cd C:\ITRI625
+   ```
+2. **Install only what the API and app need** (CPU PyTorch, about 7 minutes). For the notebook,
+   use the full `requirements.txt` instead:
+   ```bash
+   py -3.12 -m venv .venv
+   .venv\Scriptsctivate
+   pip install -r requirements-api.txt requests
+   ```
+3. **Copy the trained model** from the machine that trained it (USB stick or cloud drive), so you
+   have `C:\ITRI625\models\distilbert_best\model.safetensors` and the other files next to it.
+   Without it, retrain with the notebook (see "Model weights").
+4. **Run it** in two terminals (both with `.venv` activated):
+   ```bash
+   uvicorn api.main:app --port 8000
+   python -m app.main
+   ```
+   Demo emails are in `samples/`. On a CPU, a prediction takes about 30 ms and an explanation 2–6 s.
+
 ## Setup
 
 You need Python 3.12 and git. An NVIDIA GPU is optional; training falls back to the CPU.

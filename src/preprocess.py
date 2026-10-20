@@ -33,6 +33,15 @@ from bs4 import BeautifulSoup, MarkupResemblesLocatorWarning
 
 warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
 
+# lxml is the parser the data pipeline used. If it can't load (on Windows its DLLs fail
+# when the project sits in a path longer than 260 characters), fall back to Python's
+# built-in parser instead of crashing on every HTML email.
+try:
+    import lxml.etree  # noqa: F401
+    HTML_PARSER = "lxml"
+except ImportError:
+    HTML_PARSER = "html.parser"
+
 _HTML_TAG = re.compile(r"<\s*/?\s*(html|head|body|div|p|br|table|tr|td|span|font|a|img|b|i|u|center|meta|style|script)\b", re.I)
 _HEADER_NAMES = (r"date|from|to|cc|bcc|subject|sender|reply[ \t-]*to|return[ \t-]*path|received"
                  r"|delivered[ \t-]*to|message[ \t-]*id|in[ \t-]*reply[ \t-]*to|references|mime[ \t-]*version"
@@ -60,7 +69,7 @@ _BLANK_LINES = re.compile(r"\s*\n\s*")
 
 def html_to_text(text: str) -> str:
     if _HTML_TAG.search(text):
-        soup = BeautifulSoup(text, "lxml")
+        soup = BeautifulSoup(text, HTML_PARSER)
         for tag in soup(["script", "style", "head"]):
             tag.decompose()
         text = soup.get_text(separator=" ")

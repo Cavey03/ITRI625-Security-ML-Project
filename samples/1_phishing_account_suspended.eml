@@ -1,0 +1,14 @@
+From: Northwind Bank Security <security@northwind-bank-alerts.example.net>
+To: customer@example.org
+Subject: Urgent: your account has been suspended
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+
+<html><body>
+<p>Dear valued customer,</p>
+<p>We detected <b>unusual sign-in activity</b> on your Northwind Bank account. For your protection, online access has been <b>temporarily suspended</b>.</p>
+<p>To restore access, please verify your identity and password within <b>24 hours</b>:</p>
+<p><a href="http://northwind-secure-login.example.net/verify">http://northwind-secure-login.example.net/verify</a></p>
+<p>If you do not verify, your account will be permanently closed.</p>
+<p>Northwind Bank Security Team</p>
+</body></html>

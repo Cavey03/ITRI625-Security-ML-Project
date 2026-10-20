@@ -1,0 +1,9 @@
+id,subject,body
+1,Urgent: your account has been suspended,"We detected unusual sign-in activity. Verify your password within 24 hours at http://northwind-secure-login.example.net/verify or your account will be closed."
+2,Project review moved to Thursday,"Hi team, the project review is moved to Thursday at 10:00 in room 2. Slides attached. Thanks, Sam"
+3,You have won a gift card,"Congratulations! You were selected to receive a free 500 dollar gift card. Click here to claim your prize now."
+4,Lunch on Friday?,"Are we still on for lunch on Friday? Let me know which place suits you."
+5,Invoice overdue,"Your invoice is overdue. Download the attached document and pay immediately to avoid legal action: http://pay-invoices.example.net"
+6,,
+7,Minutes from today,"Attached are the minutes from today's meeting. Action items are on page 2."
+8,Mailbox almost full,"Your mailbox is almost full. Log in here to upgrade your storage: http://mail-upgrade.example.org"

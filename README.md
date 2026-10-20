@@ -77,7 +77,7 @@ weights (`models/distilbert_best/`, 268 MB, not in git). Tested on a fresh clone
    use the full `requirements.txt` instead:
    ```bash
    py -3.12 -m venv .venv
-   .venv\Scriptsctivate
+   .venv\Scripts\activate
    pip install -r requirements-api.txt requests
    ```
 3. **Copy the trained model** from the machine that trained it (USB stick or cloud drive), so you
